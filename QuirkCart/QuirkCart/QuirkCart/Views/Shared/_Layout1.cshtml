@@ -1,0 +1,113 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .na {
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+            font-size: 20px;
+            padding: 0px 10px;
+        }
+
+            .na:hover {
+                text-decoration: none;
+                background-color: transparent;
+                color: inherit;
+                border-radius: 20px;
+            }
+
+        * {
+            font-family: Poppins;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            font-family: Poppins;
+        }
+
+        .navbar {
+            background-color: white;
+            box-shadow: 0px 10px 26px -7px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            color: #007bff;
+            font-size: 24px;
+            padding: 0px 15px !important;
+            margin-bottom: 7px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #007bff;
+            padding: 0px;
+        }
+
+        .container-fluid {
+            padding: 20px 20px 0px 20px;
+            height: 80px;
+        }
+    </style>
+    <title>@Page.Title</title>
+    @RenderSection("head", required: false)
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-light" style="">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/"><img src="~/Content/img/logo.png" alt="Logo" style="max-height: 50px; margin-bottom:5px;"></a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Category", "Index", "User", null, new { @class = "na" })</li>
+                <li>
+                    @if (Session["u_id"] != null)
+                    {
+                        @Html.ActionLink("Post An Ad", "CreateAd", "User", null, new { @class = "na" })
+
+                    }
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+
+                <li>
+                        @Html.ActionLink("Admin Login", "Login", "Admin", null, new { @class = "na" })
+                </li>
+
+                <li>
+                    @if (Session["u_id"] == null)
+                    {
+
+                        @Html.ActionLink("Sign In", "login", "User", null, new { @class = "na" })
+
+                    }
+                </li>
+
+
+                <li>
+                    @if (Session["u_id"] == null)
+                    {
+                        @Html.ActionLink("Sign Up", "SignUp", "User", null, new { @class = "na" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Sign Out", "Signout", "User", null, new { @class = "na" })
+                    }
+
+                </li>
+            </ul>
+        </div>
+
+
+    </nav>
+
+    @RenderBody()
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>

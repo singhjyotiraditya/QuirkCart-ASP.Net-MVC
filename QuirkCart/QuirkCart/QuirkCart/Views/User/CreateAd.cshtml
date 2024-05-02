@@ -1,0 +1,209 @@
+﻿@model QuirkCart.Models.tbl_product
+@{
+    Layout = null;
+}
+
+<style>
+    *{
+        font-family: Poppins !important;
+    }
+    #box {
+        border: 1px solid black;
+        height: 100%;
+    }
+
+    #main-div {
+        background-size: 100% 900px;
+    }
+
+    .insidebox h1 {
+        color: black;
+        font-weight: 600;
+        margin-bottom:30px;
+    }
+
+    .insidebox {
+        margin: 10% auto 10% auto;
+        max-width: 800px;
+        min-width: 200px;
+        padding-left: 60px;
+        padding-right: 60px;
+        border-radius: 10px;
+    }
+
+    .form-group {
+        display: flex;
+        justify-content: center;
+    }
+
+    .input-group{
+        display: block;
+        width: 500px;
+    }
+
+    .form-control {
+        background-color: #f3f1ff !important;
+        border: 0px !important;
+    }
+
+    .input-group select {
+        border: 0px !important;
+    }
+
+
+    .form-control {
+        border-radius: 10px !important;
+    }
+
+    input[type="file"] {
+        display: none !important;
+    }
+
+    .custom-file-upload {
+        border-radius: 7px;
+        display: inline-block;
+        padding: 10px 15px;
+        cursor: pointer;
+        background-color: #f3f1ff;
+        font-weight: 500;
+    }
+
+        .custom-file-upload:hover {
+            background-color: #aea0ff;
+            color: white;
+        }
+
+        div h1 {
+            text-align: center;
+        }
+
+    p#para {
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .btn-purple-moon {
+        background: #4e54c8;
+        background: -webkit-linear-gradient(to right, #8876f3, #5942ee);
+        background: linear-gradient(to right, #8876f3, #5942ee);
+        color: #fff;
+        border-radius: 15px !important;
+        padding: 12px 20px !important;
+        margin-top: 10px;
+    }
+
+
+
+        .btn-purple-moon:hover {
+            color: white !important;
+        }
+
+    btn:focus {
+        outline: none;
+    }
+</style>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+
+
+<script src="js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
+<div id="main-div">
+    <div id="box" class="img-responsive">
+        @using (Html.BeginForm("CreateAd",
+                        "User",
+                        FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
+        {
+            <div class="insidebox" style="justify-content: center " >
+                <div> <h1>LIST NEW PRODUCT</h1></div>
+
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        @Html.DropDownListFor(x => x.pro_fk_cat, ViewBag.categorylist as SelectList, "--select--", new { @class = "form-control" })
+                    </div>
+                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_fk_cat) </span>
+
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
+                        @Html.TextBoxFor(x => x.pro_name, new { @class = "form-control", @placeholder = "Product Name" })
+
+                    </div>
+                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_name) </span>
+
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
+                        @Html.TextBoxFor(x => x.pro_price, new { @class = "form-control", @placeholder = "Price" })
+
+                    </div>
+                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_price) </span>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
+                        @Html.TextAreaFor(x => x.pro_des, new { @class = "form-control", @placeholder = "Description" })
+
+                    </div>
+                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_des) </span>
+
+                </div>
+
+
+                <div class="form-group" style="background-color: transparent !important">
+                    <div class="input-group" style="display:flex; justify-content: center">
+                        <label for="imgfile" class="custom-file-upload">
+                            <input type="file" name="imgfile" id="imgfile" class="form-control" required="required" />    Upload Product Image
+                        </label>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="form-group" style="display:flex; justify-content: center ">
+
+                    <input type="submit" value="Add a New Product" class="btn btn-purple-moon" />
+
+                </div>
+
+                <div class="form-group">
+                    <p style="color:red">@ViewBag.error</p>
+                </div>
+
+
+
+            </div>
+
+        }
+    </div>
+
+</div>
+
+
+<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
